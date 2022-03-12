@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import FormContainer from '../Components/FormContainer'
+import CheckoutSteps from '../Components/CheckoutSteps'
 import { saveShippingAddress } from '../actions/cartActions'
 
 const ShippingScreen = ({history}) => {
@@ -17,9 +18,11 @@ const ShippingScreen = ({history}) => {
         dispatch(saveShippingAddress({address, city,postalCode,country}))
         history.push('/payment')
     }
- 
+
+    
   return (
     <FormContainer>
+        <CheckoutSteps step1 step2 />
         <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
             <Form.Group controlId='address'>
