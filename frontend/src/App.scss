@@ -1,0 +1,81 @@
+// shirtDesignerSideBar
+.shirtDesignerSideBar {
+    position: fixed;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid #000;
+    
+}
+.startModal {
+    .Note {
+       color: #333;
+    }
+ 
+    .radioSelection {
+       visibility: hidden;
+       position: absolute;
+       
+       &[type='radio']:checked ~ .innerDesignSelection {
+          position: relative;
+          .checkmark {
+            display: block;
+            text-align: center;
+            //  vertical-align: middle;
+             position: absolute;
+            //  font-family: FontAwesome;
+             top: -10%;
+             font-size: 18px;
+            //  line-height: 1.7;
+            font-weight: bold;
+             right: -15%;
+             z-index: 2;
+             background: #fff;
+             width: 30px;
+             border: 2px solid #000;
+             border-radius: 50%;
+             height: 30px;
+          }
+       }
+    }
+ 
+    
+    .DesignSelection {
+       margin: 10px;
+       width: 150px;
+ 
+    //    @include xxsm {
+    //       width: 130px;
+    //    }
+ 
+    //    h6 {
+    //       @include xxsm {
+    //          font-size: 13px;
+    //       }
+    //    }
+ 
+       // height: 140px;
+       padding: 5px;
+       border: 2px solid #000;
+       cursor: pointer;
+    }
+    .checkmark {
+        display: none ;
+    }
+ }
+
+.shirt-design {
+   min-height: 70vh;
+   .ShirtSvg {
+      height: 400px;
+   
+      // @include maxMinDesktop {
+      //    height: 350px;
+      // }
+   
+      // @include minDesktopLower {
+      //    height: 450px;
+      // }
+   }
+}
+ 

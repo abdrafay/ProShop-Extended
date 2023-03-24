@@ -12,9 +12,8 @@ import ProfileScreen from "./Screens/ProfileScreen";
 import ShippingScreen from "./Screens/ShippingScreen";
 import PaymentScreen from "./Screens/PaymentScreen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
-
-
-
+import DesignShirtScreen from "./Screens/DesignShirtScreen";
+import './App.scss'
 
 const App = () => {
   return (
@@ -33,6 +32,7 @@ const App = () => {
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/" component={HomeScreen} exact />
           </Container>
+            <Route path="/design/:id?" component={DesignShirtScreen} />
         </main>
         <Footer />
       </div>
