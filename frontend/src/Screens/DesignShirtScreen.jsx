@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import ShirtDesignSelectionModal from "../Components/ShirtDesignSelectionModal";
 import SideBarShirtDesign from "../Components/SideBarShirtDesign";
 import SimpleShirt from "../Components/Svgs/Shirts/SimpleShirt";
@@ -25,8 +23,9 @@ const DesignShirtScreen = () => {
           </Col>
           <Col lg={9}>
             <div className="d-flex justify-content-center align-items-center shirt-design">
+              <div className="collars"></div>
               {shirtDesign.style ? (
-                shirtDesign.style == "ShirtStyleNormal" ? (
+                shirtDesign.style === "ShirtStyleNormal" ? (
                   <SimpleShirt />
                 ) : (
                   <LongBottomShirt />

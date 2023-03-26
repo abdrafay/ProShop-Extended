@@ -66,6 +66,28 @@
 
 .shirt-design {
    min-height: 70vh;
+   position: relative;
+   .collars {
+      width: 140px !important;
+      height: auto;
+      display: block;
+      position: absolute;
+      z-index: 1;
+
+      // @include smtoxtra {
+      //    top: 0%;
+      //    left: 51%;
+      //    width: 150px !important;
+      // }
+
+      top: 14%;
+      left: 45%;
+      // transform: translate(-50%, -50%);
+
+      // @include minDesktopLower {
+      //    width: 160px !important;
+      // }
+   }
    .ShirtSvg {
       height: 400px;
    
@@ -76,6 +98,20 @@
       // @include minDesktopLower {
       //    height: 450px;
       // }
+   }
+}
+
+.cloneable-element {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
    }
 }
  

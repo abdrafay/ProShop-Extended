@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 
 import { Button, Card, Col, Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-// import Logo from "../logo.svg";
-import { ReactComponent as Logo } from "../svgs/logo.svg";
 import Cl1 from "./Svgs/collars/Cl1";
 import Cl2 from "./Svgs/collars/Cl2";
 import Cl3 from "./Svgs/collars/Cl3";
@@ -24,15 +22,35 @@ const SideBarShirtDesign = () => {
       ".shirtDesignerSideBar"
     ).style.top = `${menuHeight}px`;
   }, []);
-  const hnd = (e) => {
+  const hnd = (event, elDivClass) => {
     // check if the target is present in .shirt-design div
     // if no then add the svg to the div
-    const target = e.target;
-    console.log(target);
-    // if (!document.querySelector(".shirt-design").contains(e.target)) {
-    //   document.querySelector(".shirt-design").appendChild(e.target);
-    // }
+    const target = event.target.querySelector("svg");
+    const collar = document
+      .querySelector(".shirt-design")
+      .querySelector(`.${elDivClass}`);
+    // console.log(collar.contains("svg"));
+    if (collar.innerHTML === "") {
+      // clone the target
+      const clone = target.cloneNode(true);
+      collar.appendChild(clone);
+    } else {
+      // remove the target
+      collar.innerHTML = "";
+      // append the target
+      const clone = target.cloneNode(true);
+      collar.appendChild(clone);
+    }
+    // save collar to local storage and get it from there on refresh
+    localStorage.setItem(elDivClass, collar.innerHTML);
   };
+  useEffect(() => {
+    // get the collar from local storage
+    const collar = localStorage.getItem("collars");
+    if (collar) {
+      document.querySelector(".collars").innerHTML = collar;
+    }
+  }, []);
   return (
     <div className="shirtDesignerSideBar">
       <Accordion defaultActiveKey="0">
@@ -51,7 +69,10 @@ const SideBarShirtDesign = () => {
                     (Collar, index) => {
                       return (
                         <Col lg={6} key={index}>
-                          <div onClick={hnd}>
+                          <div
+                            class="cloneable-element"
+                            onClick={(e) => hnd(e, "collars")}
+                          >
                             <Collar />
                           </div>
                         </Col>
