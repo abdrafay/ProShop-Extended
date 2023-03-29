@@ -24,6 +24,9 @@ const DesignShirtScreen = () => {
           <Col lg={9}>
             <div className="d-flex justify-content-center align-items-center shirt-design">
               <div className="collars"></div>
+              <div className="cuffs">
+                <div className="d-flex cuffRow justify-content-center align-items-center"></div>
+              </div>
               {shirtDesign.style ? (
                 shirtDesign.style === "ShirtStyleNormal" ? (
                   <SimpleShirt />
