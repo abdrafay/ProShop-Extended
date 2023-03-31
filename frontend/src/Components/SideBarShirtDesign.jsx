@@ -38,6 +38,28 @@ const SideBarShirtDesign = () => {
     });
   };
 
+  const handleBtnClone = (event) => {
+    console.log(event.target);
+    // clone the target and append it to the shirt-design div 6 times
+    const target = event.target.querySelector("svg");
+    const destination = document
+      .querySelector(".shirt-design")
+      .querySelector(".btns");
+    // // console.log(collar.contains("svg"));
+    if (destination.innerHTML === "") {
+      //   // clone the target
+      //   // clone 6 times
+      for (let i = 0; i < 6; i++) {
+        // create a div
+        const div = document.createElement("div");
+        div.classList.add("btnContainerInner");
+        const clone = target.cloneNode(true);
+        div.appendChild(clone);
+        destination.appendChild(div);
+      }
+    }
+  };
+
   // get the height of the menu
   useEffect(() => {
     const menuHeight = document.querySelector(".navbar")
@@ -186,8 +208,11 @@ const SideBarShirtDesign = () => {
                     </Col>
                   );
                 })}
-                <Btn bgColor={bgColor} />
               </Row>
+
+              <div onClick={handleBtnClone} className="cloneable-element">
+                <Btn bgColor={bgColor} />
+              </div>
             </Card.Body>
           </Accordion.Collapse>
         </Card>

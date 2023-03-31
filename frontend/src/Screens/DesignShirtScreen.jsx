@@ -18,15 +18,16 @@ const DesignShirtScreen = () => {
       />
       <div>
         <Row className="m-0">
-          <Col lg={3} className="p-relative">
+          <Col lg={2} className="p-relative">
             <SideBarShirtDesign />
           </Col>
-          <Col lg={9}>
+          <Col lg={10}>
             <div className="d-flex justify-content-center align-items-center shirt-design">
               <div className="collars"></div>
               <div className="cuffs">
                 <div className="d-flex cuffRow justify-content-center align-items-center"></div>
               </div>
+              <div className="btns"></div>
               {shirtDesign.style ? (
                 shirtDesign.style === "ShirtStyleNormal" ? (
                   <SimpleShirt />
