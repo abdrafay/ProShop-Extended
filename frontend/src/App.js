@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -22,6 +22,7 @@ const App = () => {
         <Header />
         <main className="py-3">
           <Container>
+            <Route path="/" component={HomeScreen} exact />
             <Route path="/shipping" component={ShippingScreen} />
             <Route path="/payment" component={PaymentScreen} />
             <Route path="/placeorder" component={PlaceOrderScreen} />
@@ -30,7 +31,7 @@ const App = () => {
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/" component={HomeScreen} exact />
+            
           </Container>
             <Route path="/design/:id?" component={DesignShirtScreen} />
         </main>
