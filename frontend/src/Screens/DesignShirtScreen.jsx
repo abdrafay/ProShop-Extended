@@ -18,10 +18,14 @@ const DesignShirtScreen = () => {
       />
       <div>
         <Row className="m-0">
-          <Col lg={2} className="p-relative">
+          <Col lg={3} className="p-relative">
             <SideBarShirtDesign />
           </Col>
-          <Col lg={10}>
+          <Col
+            lg={9}
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: "700px" }}
+          >
             <div className="d-flex justify-content-center align-items-center shirt-design">
               <div className="collars"></div>
               <div className="cuffs">

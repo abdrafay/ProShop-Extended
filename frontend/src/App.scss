@@ -70,7 +70,8 @@
 
 } 
 .shirt-design {
-   min-height: 70vh;
+   // min-height: 70vh;
+   height: 100%;
    position: relative;
    .btns {
       position: absolute;
@@ -82,8 +83,9 @@
                   // }
 
                   // height: 420px !important;
-                  top: 16%;
+                  top: 50%;
                   left: 50%;
+                  transform: translate(-50%, -50%);
 
                   .btnContainerInner {
                      padding-bottom: 30px;
@@ -116,9 +118,9 @@
       //    width: 150px !important;
       // }
 
-      top: 14%;
-      left: 45%;
-      // transform: translate(-50%, -50%);
+      top: 22.5%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       // @include minDesktopLower {
       //    width: 160px !important;
@@ -128,9 +130,10 @@
       width: fit-content !important;
       height: auto !important;
       display: block;
-      top: 66%;
+      top: 68%;
       position: absolute;
-      left: 39%;
+      transform: translate(-50%,-50%);
+      left: 50%;
       // @include maxMinDesktop {
       //    left: 16.6%;
       // }
