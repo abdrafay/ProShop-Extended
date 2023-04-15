@@ -14,6 +14,7 @@ import {
 import { listProductDetails } from "../actions/productActions";
 import Loader from "../Components/Loader";
 import Message from "../Components/Message";
+import Layout from "../Components/Layout";
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
@@ -31,7 +32,7 @@ const ProductScreen = ({ match, history }) => {
     history.push(`/design/${match.params.id}?qty=${qty}`);
   };
   return (
-    <>
+    <Layout>
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
@@ -42,24 +43,33 @@ const ProductScreen = ({ match, history }) => {
       ) : (
         <Row>
           <Col md={6}>
-            <Image src={product.image} alt={product.name} fluid />
+            <Image
+              className="productImage"
+              src={product.image}
+              alt={product.name}
+              fluid
+            />
           </Col>
-          <Col md={3}>
-            <ListGroup variant="flush">
-              <ListGroup.Item>
-                <h3>{product.name}</h3>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
-                />
-              </ListGroup.Item>
-              <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-              <ListGroup.Item>
-                Description: ${product.description}
-              </ListGroup.Item>
-            </ListGroup>
+          <Col md={6}>
+            <h3>{product.name}</h3>
+            <Rating
+              value={product.rating}
+              text={`${product.numReviews} reviews`}
+            />
+            <h4>Price:</h4>
+            <p>
+              <b>${product.price}</b>
+            </p>
+            <h4>Description</h4>
+            <p>${product.description}</p>
+            <Button
+              className="btn-block"
+              type="button"
+              onClick={designPage}
+              disabled={product.countInStock === 0}
+            >
+              Design A Shirt
+            </Button>
           </Col>
           <Col md={3}>
             <Card>
@@ -111,21 +121,13 @@ const ProductScreen = ({ match, history }) => {
                     Add To Cart
                   </Button> */}
                   {/* Button to Going to Design Page and then adding to Cart */}
-                  <Button
-                    className="btn-block"
-                    type="button"
-                    onClick={designPage}
-                    disabled={product.countInStock === 0}
-                  >
-                    Add To Cart
-                  </Button>
                 </ListGroup.Item>
               </ListGroup>
             </Card>
           </Col>
         </Row>
       )}
-    </>
+    </Layout>
   );
 };
 

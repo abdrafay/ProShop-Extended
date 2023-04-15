@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+body {
+   font-family: 'Poppins', sans-serif;
+}
 // shirtDesignerSideBar
 .shirtDesignerSideBar {
     position: fixed;
@@ -69,10 +73,24 @@
    border-radius: 50%;
 
 } 
-#LandingSection {
-   width: 100%;
-   height: 100vh;
-}
+// #LandingSection {
+   // width: 100%;
+   // height: 100vh;
+   .LandingSection__content {
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      .lnd_content {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 100%;
+         text-align: center;
+         
+      }
+   }
+// }
 .shirt-design {
    // min-height: 70vh;
    height: 100%;
@@ -194,4 +212,23 @@
       height: 100%;
    }
 }
- 
+
+// @Product Card Design
+.productCard {
+   border: 0;
+   .productCardContent {
+      padding: 5px !important;
+   }
+   .card-link {
+      box-shadow: -1px 4px 20px 10px #eeeeee;
+      border-radius: 15px !important;
+
+      .card-image {
+         border-radius: 15px !important;
+      }   
+   }
+}
+
+.productImage {
+   border-radius: 20px !important;
+}

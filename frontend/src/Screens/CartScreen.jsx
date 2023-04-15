@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import Message from "../Components/Message";
+import Layout from "../Components/Layout";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -32,7 +33,8 @@ const CartScreen = ({ match, location, history }) => {
     history.push("/login?redirect=shipping");
   };
   return (
-    <Row>
+    <Layout>
+      <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
@@ -111,6 +113,7 @@ const CartScreen = ({ match, location, history }) => {
         </Card>
       </Col>
     </Row>
+    </Layout>
   );
 };
 
