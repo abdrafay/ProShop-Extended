@@ -18,31 +18,33 @@ const HomeScreen = () => {
   useEffect(() => {
     let nav = document.querySelector("nav");
     let navHeight = nav.getBoundingClientRect().height;
-    let lndSec = document.querySelector(".LandingSection__content");
-    lndSec.style.height = `calc(100vh - ${navHeight}px)`;
+    // let lndSec = document.querySelector(".LandingSection__content");
+    // lndSec.style.height = `calc(100vh - ${navHeight}px)`;
   }, []);
 
   return (
     <>
-      <div
-        className="LandingSection__content"
-        style={{ backgroundImage: "url('/images/Banner.png')" }}
-      >
-        <Container style={{ position: "relative", height: "100%" }}>
-          <div className="lnd_content">
-            <h1>Buy The Best Products From Our Shop</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              quae, voluptatum, quod, voluptas quibusdam voluptates quidem
-              voluptatibus quos quia quas nesciunt. Quisquam, quibusdam
-              voluptatibus. Quisquam, quibusdam voluptatibus. Quisquam,
-              quibusdam voluptatibus.
-            </p>
-            <LinkContainer to="/login">
-              <button className="btn btn-primary">Get Started</button>
-            </LinkContainer>
-          </div>
-        </Container>
+      <div id="LandingSection">
+        <div
+          className="LandingSection__content"
+          style={{ backgroundImage: "url('/images/Banner.png')" }}
+        >
+          <Container style={{ position: "relative", height: "100%" }}>
+            <div className="lnd_content">
+              <h1>Buy The Best Products From Our Shop</h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam quae, voluptatum, quod, voluptas quibusdam voluptates
+                quidem voluptatibus quos quia quas nesciunt. Quisquam, quibusdam
+                voluptatibus. Quisquam, quibusdam voluptatibus. Quisquam,
+                quibusdam voluptatibus.
+              </p>
+              <LinkContainer to="/login">
+                <button className="btn btn-primary">Get Started</button>
+              </LinkContainer>
+            </div>
+          </Container>
+        </div>
       </div>
       <main className="py-5">
         <Container>

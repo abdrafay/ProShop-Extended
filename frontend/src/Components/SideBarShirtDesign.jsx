@@ -131,7 +131,7 @@ const SideBarShirtDesign = () => {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              Click me!
+              Collars
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
@@ -161,7 +161,7 @@ const SideBarShirtDesign = () => {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Click me!
+              Cuffs
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
@@ -174,7 +174,7 @@ const SideBarShirtDesign = () => {
                       return (
                         <Col lg={6} key={index}>
                           <div
-                            className="cloneable-element"
+                            className="cloneable-element cuffs-elems"
                             onClick={(e) => hnd(e, "cuffs")}
                           >
                             <Cuff />
@@ -191,7 +191,7 @@ const SideBarShirtDesign = () => {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="2">
-              Click me!
+              Buttons
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">

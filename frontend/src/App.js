@@ -21,7 +21,6 @@ const App = () => {
       <div className="App">
         <Header />
             <Route path="/" component={HomeScreen} exact />
-        
             <Route path="/shipping" component={ShippingScreen} />
             <Route path="/payment" component={PaymentScreen} />
             <Route path="/placeorder" component={PlaceOrderScreen} />
@@ -30,10 +29,7 @@ const App = () => {
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
-            
-        
             <Route path="/design/:id?" component={DesignShirtScreen} />
-        
         <Footer />
       </div>
     </Router>
