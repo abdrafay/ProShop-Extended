@@ -38,3 +38,17 @@ export const listProductDetails = (id) => async (dispatch) => {
     });
   }
 };
+
+// export const getProductDetails = (id) => async (dispatch) => {
+//   try {
+//     dispatch({ type: PRODUCT_DETAILS_REQUEST });
+//     const { data } = await axios.get(`/api/products/${id}`);
+//     console.log("data", data);
+//     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+//   } catch (error) {
+//     dispatch({
+//       type: PRODUCT_DETAILS_FAIL,
+//       payload: error.message,
+//     });
+//   }
+// }

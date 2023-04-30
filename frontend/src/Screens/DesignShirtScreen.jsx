@@ -4,9 +4,14 @@ import ShirtDesignSelectionModal from "../Components/ShirtDesignSelectionModal";
 import SideBarShirtDesign from "../Components/SideBarShirtDesign";
 import SimpleShirt from "../Components/Svgs/Shirts/SimpleShirt";
 import LongBottomShirt from "../Components/Svgs/Shirts/LongBottomShirt";
+import { useSelector } from "react-redux";
 
-const DesignShirtScreen = () => {
+const DesignShirtScreen = ({match}) => {
   const [shirtDesign, setShirtDesign] = useState({}); // Shirt Design State
+  // const productId = match.params.id;
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
+  // const qty = location.search ? Number(location.search.split("=")[1]) : 1;
   useEffect(() => {
     console.log(shirtDesign);
   }, [shirtDesign]);
@@ -15,11 +20,12 @@ const DesignShirtScreen = () => {
       <ShirtDesignSelectionModal
         setShirtDesign={setShirtDesign}
         shirtDesign={shirtDesign}
+        image={product.image}
       />
       <div>
         <Row className="m-0">
           <Col lg={3} className="p-relative">
-            <SideBarShirtDesign />
+            <SideBarShirtDesign image={product.image}/>
           </Col>
           <Col
             lg={9}
@@ -34,9 +40,9 @@ const DesignShirtScreen = () => {
               <div className="btns"></div>
               {shirtDesign.style ? (
                 shirtDesign.style === "ShirtStyleNormal" ? (
-                  <SimpleShirt />
+                  <SimpleShirt image={product.image} />
                 ) : (
-                  <LongBottomShirt />
+                  <LongBottomShirt image={product.image} />
                 )
               ) : (
                 ""

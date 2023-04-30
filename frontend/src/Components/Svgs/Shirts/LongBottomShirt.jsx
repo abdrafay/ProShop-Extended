@@ -67,7 +67,7 @@ const LongBottomShirt = ({ image }) => {
           id="LongBottom-image"
           width="768"
           height="1024"
-          xlinkHref="Images/Red-Cotton-Linen.jpg"
+          xlinkHref={image}
         />
       </defs>
       <g id="LongBottomShirt">

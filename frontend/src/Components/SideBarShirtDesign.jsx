@@ -21,7 +21,7 @@ import Cuff6 from "./Svgs/cuffs/Cuff6";
 import Cuff7 from "./Svgs/cuffs/Cuff7";
 import Cuff8 from "./Svgs/cuffs/Cuff8";
 
-const SideBarShirtDesign = () => {
+const SideBarShirtDesign = ({image}) => {
   const colors = ["#000000", "#ffffff", "#ff0000", "#00ff00", "#0000ff"];
   const [bgColor, setBgColor] = useState(colors[0]);
 
@@ -147,7 +147,7 @@ const SideBarShirtDesign = () => {
                             className="cloneable-element"
                             onClick={(e) => hnd(e, "collars")}
                           >
-                            <Collar />
+                            <Collar image={image} />
                           </div>
                         </Col>
                       );
@@ -177,7 +177,7 @@ const SideBarShirtDesign = () => {
                             className="cloneable-element cuffs-elems"
                             onClick={(e) => hnd(e, "cuffs")}
                           >
-                            <Cuff />
+                            <Cuff image={image}/>
                           </div>
                         </Col>
                       );

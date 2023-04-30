@@ -24,12 +24,13 @@ const products = [
     numReviews: 8,
   },
   {
-    name: "Cannon EOS 80D DSLR Camera",
-    image: "/images/camera.jpg",
+    name: "Fabric",
+    // image: "/images/camera.jpg",
+    image: "https://media.istockphoto.com/id/1448591466/photo/blank-fabric-background-or-texture.jpg?b=1&s=170667a&w=0&k=20&c=E63VeO4AkiYkmWGTnCcDUuZnKDUttoWVadsGbCLZJRk=",
     description:
       "Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design",
-    brand: "Cannon",
-    category: "Electronics",
+    brand: "J.",
+    category: "Fabric",
     price: 929.99,
     countInStock: 5,
     rating: 3,
