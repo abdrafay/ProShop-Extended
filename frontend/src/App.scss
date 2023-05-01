@@ -218,7 +218,7 @@ h1, h2, h3, h4, h5, h6 {
    .cuffs {
       width: fit-content !important;
       height: auto !important;
-      display: block;
+      display: flex;
       top: 68%;
       position: absolute;
       transform: translate(-50%,-50%);

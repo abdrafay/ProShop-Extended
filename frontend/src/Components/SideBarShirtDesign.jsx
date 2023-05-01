@@ -24,6 +24,8 @@ import Cuff6 from "./Svgs/cuffs/Cuff6";
 import Cuff7 from "./Svgs/cuffs/Cuff7";
 import Cuff8 from "./Svgs/cuffs/Cuff8";
 
+let allCuffs = [Cl1, Cl2, Cl3, Cl4, Cl5, Cl6, Cl7, Cl8];
+
 const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
   const colors = ["#000000", "#ffffff", "#ff0000", "#00ff00", "#0000ff"];
   const [bgColor, setBgColor] = useState(colors[0]);
@@ -45,6 +47,7 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
     console.log(event.target);
     // clone the target and append it to the shirt-design div 6 times
     const target = event.target.querySelector("svg");
+
     const destination = document
       .querySelector(".shirt-design")
       .querySelector(".btns");
@@ -66,7 +69,6 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
       });
     }
   };
-
   // get the height of the menu
   useEffect(() => {
     const menuHeight = document.querySelector(".navbar")
@@ -80,49 +82,40 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
   const hnd = (event, elDivClass) => {
     // check if the target is present in .shirt-design div
     // if no then add the svg to the div
-
-    console.log(event.target, "targetr");
+    console.log(event.target, "target");
     const target = event.target.querySelector("svg");
-    const nonDisplayElems = document.getElementById("nonDisplayElems");
+    // get the data-name attribute of target and extract out number
+    const name = target.getAttribute("data-name");
     let destination = document
       .querySelector(".shirt-design")
       .querySelector(`.${elDivClass}`);
     // console.log(collar.contains("svg"));
     if (elDivClass === "cuffs") {
-      destination = destination.querySelector(".cuffRow");
-      if (destination.innerHTML === "") {
+      let dst = destination.querySelector(".cuffRow");
+      if (dst.innerHTML === "") {
         // clone the target
         // clone 2 times
         const clone = target.cloneNode(true);
         const clone2 = target.cloneNode(true);
-        const els = React.cloneElement(target);
-        console.log(els, "els");
-        // add a class to clone2
-        clone2.classList.add("cuff2nd");
-        ReactDOM.render(els, destination);
-        let newClone1 = nonDisplayElems.appendChild(clone);
-        let newClone2 = nonDisplayElems.appendChild(clone2);
 
-        destination.appendChild(newClone1);
-        destination.appendChild(newClone2);
+        clone2.classList.add("cuff2nd");
+
+        dst.appendChild(clone);
+        dst.appendChild(clone2);
       } else {
         // remove the target
-        destination.innerHTML = "";
+        dst.innerHTML = "";
         // append the target
         const clone = target.cloneNode(true);
         const clone2 = target.cloneNode(true);
         // add a class to clone2
         clone2.classList.add("cuff2nd");
-        // destination.appendChild(clone);
-        // destination.appendChild(clone2);
-        let newClone1 = nonDisplayElems.appendChild(clone);
-        let newClone2 = nonDisplayElems.appendChild(clone2);
-
-        destination.appendChild(newClone1);
-        destination.appendChild(newClone2);
+        dst.appendChild(clone);
+        dst.appendChild(clone2);
       }
       setShirtDesign({
         ...shirtDesign,
+        cuffs: name,
       });
     } else {
       if (destination.innerHTML === "") {
@@ -134,12 +127,12 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
         destination.innerHTML = "";
         // append the target
         const clone = target.cloneNode(true);
-        // destination.appendChild(clone);
-
-        let newClone = nonDisplayElems.appendChild(clone);
-
-        destination.appendChild(newClone);
+        destination.appendChild(clone);
       }
+      setShirtDesign({
+        ...shirtDesign,
+        collar: name,
+      });
     }
 
     // save item to local storage and get it from there on refresh
@@ -148,8 +141,13 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
   useEffect(() => {
     // get the collar from local storage
     const collar = localStorage.getItem("collars");
+    const cuffs = localStorage.getItem("cuffs");
+
     if (collar) {
       document.querySelector(".collars").innerHTML = collar;
+    }
+    if (cuffs) {
+      document.querySelector(".cuffs").innerHTML = cuffs;
     }
   }, []);
   return (
@@ -244,7 +242,6 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
           </Accordion.Collapse>
         </Card>
       </Accordion>
-      <div id="nonDisplayElems"></div>
     </div>
   );
 };
