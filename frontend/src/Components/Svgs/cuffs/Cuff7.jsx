@@ -4,7 +4,7 @@ const Cuff7 = ({ image }) => {
   return (
     <svg
       id="ad4df73d-9f1c-4ba5-ac60-b332c57696b5"
-      data-name="Layer 1"
+      data-name="CuffDesign7"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="230 390 300 260"

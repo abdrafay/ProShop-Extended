@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import ShirtDesignSelectionModal from "../Components/ShirtDesignSelectionModal";
 import SideBarShirtDesign from "../Components/SideBarShirtDesign";
 import SimpleShirt from "../Components/Svgs/Shirts/SimpleShirt";
 import LongBottomShirt from "../Components/Svgs/Shirts/LongBottomShirt";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { listProductDetails } from "../actions/productActions";
 
-const DesignShirtScreen = ({match}) => {
+const DesignShirtScreen = ({ match, history, location }) => {
   const [shirtDesign, setShirtDesign] = useState({}); // Shirt Design State
+  const dispatch = useDispatch();
   // const productId = match.params.id;
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-  // const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+
+  useEffect(() => {
+    dispatch(listProductDetails(match.params.id));
+  }, [dispatch, match]);
+
+  const shirtDesignHandler = () => {
+    localStorage.setItem("shirt-design-info", JSON.stringify(shirtDesign));
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
+
   useEffect(() => {
     console.log(shirtDesign);
   }, [shirtDesign]);
+
   return (
     <div>
       <ShirtDesignSelectionModal
@@ -25,7 +39,11 @@ const DesignShirtScreen = ({match}) => {
       <div>
         <Row className="m-0">
           <Col lg={3} className="p-relative">
-            <SideBarShirtDesign image={product.image}/>
+            <SideBarShirtDesign
+              shirtDesign={shirtDesign}
+              setShirtDesign={setShirtDesign}
+              image={product.image}
+            />
           </Col>
           <Col
             lg={9}
@@ -47,6 +65,9 @@ const DesignShirtScreen = ({match}) => {
               ) : (
                 ""
               )}
+            </div>
+            <div onClick={shirtDesignHandler} className="btn-ps-top">
+              <Button>Save</Button>
             </div>
           </Col>
         </Row>

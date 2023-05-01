@@ -25,8 +25,8 @@ const products = [
   },
   {
     name: "Fabric",
-    // image: "/images/camera.jpg",
-    image: "https://media.istockphoto.com/id/1448591466/photo/blank-fabric-background-or-texture.jpg?b=1&s=170667a&w=0&k=20&c=E63VeO4AkiYkmWGTnCcDUuZnKDUttoWVadsGbCLZJRk=",
+    image: "/images/text.jpg",
+    // image: "https://media.istockphoto.com/id/1448591466/photo/blank-fabric-background-or-texture.jpg?b=1&s=170667a&w=0&k=20&c=E63VeO4AkiYkmWGTnCcDUuZnKDUttoWVadsGbCLZJRk=",
     description:
       "Characterized by versatile imaging specs, the Canon EOS 80D further clarifies itself using a pair of robust focusing systems and an intuitive design",
     brand: "J.",

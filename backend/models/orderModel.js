@@ -12,6 +12,9 @@ const orderSchema = mongoose.Schema(
           type: String,
           required: true,
         },
+        shirtDesign: {
+          type: String
+        },
         qty: {
           type: Number,
           required: true,

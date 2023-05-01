@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 
 import { Button, Card, Col, Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
+// btn
 import Btn from "./Svgs/Btn";
+// collars
 import Cl1 from "./Svgs/collars/Cl1";
 import Cl2 from "./Svgs/collars/Cl2";
 import Cl3 from "./Svgs/collars/Cl3";
@@ -11,7 +14,7 @@ import Cl5 from "./Svgs/collars/Cl5";
 import Cl6 from "./Svgs/collars/Cl6";
 import Cl7 from "./Svgs/collars/Cl7";
 import Cl8 from "./Svgs/collars/Cl8";
-
+// cuffs
 import Cuff1 from "./Svgs/cuffs/Cuff1";
 import Cuff2 from "./Svgs/cuffs/Cuff2";
 import Cuff3 from "./Svgs/cuffs/Cuff3";
@@ -21,7 +24,7 @@ import Cuff6 from "./Svgs/cuffs/Cuff6";
 import Cuff7 from "./Svgs/cuffs/Cuff7";
 import Cuff8 from "./Svgs/cuffs/Cuff8";
 
-const SideBarShirtDesign = ({image}) => {
+const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
   const colors = ["#000000", "#ffffff", "#ff0000", "#00ff00", "#0000ff"];
   const [bgColor, setBgColor] = useState(colors[0]);
 
@@ -57,6 +60,10 @@ const SideBarShirtDesign = ({image}) => {
         div.appendChild(clone);
         destination.appendChild(div);
       }
+      setShirtDesign({
+        ...shirtDesign,
+        buttons: true,
+      });
     }
   };
 
@@ -73,7 +80,10 @@ const SideBarShirtDesign = ({image}) => {
   const hnd = (event, elDivClass) => {
     // check if the target is present in .shirt-design div
     // if no then add the svg to the div
+
+    console.log(event.target, "targetr");
     const target = event.target.querySelector("svg");
+    const nonDisplayElems = document.getElementById("nonDisplayElems");
     let destination = document
       .querySelector(".shirt-design")
       .querySelector(`.${elDivClass}`);
@@ -83,13 +93,18 @@ const SideBarShirtDesign = ({image}) => {
       if (destination.innerHTML === "") {
         // clone the target
         // clone 2 times
-
         const clone = target.cloneNode(true);
         const clone2 = target.cloneNode(true);
+        const els = React.cloneElement(target);
+        console.log(els, "els");
         // add a class to clone2
         clone2.classList.add("cuff2nd");
-        destination.appendChild(clone);
-        destination.appendChild(clone2);
+        ReactDOM.render(els, destination);
+        let newClone1 = nonDisplayElems.appendChild(clone);
+        let newClone2 = nonDisplayElems.appendChild(clone2);
+
+        destination.appendChild(newClone1);
+        destination.appendChild(newClone2);
       } else {
         // remove the target
         destination.innerHTML = "";
@@ -98,9 +113,17 @@ const SideBarShirtDesign = ({image}) => {
         const clone2 = target.cloneNode(true);
         // add a class to clone2
         clone2.classList.add("cuff2nd");
-        destination.appendChild(clone);
-        destination.appendChild(clone2);
+        // destination.appendChild(clone);
+        // destination.appendChild(clone2);
+        let newClone1 = nonDisplayElems.appendChild(clone);
+        let newClone2 = nonDisplayElems.appendChild(clone2);
+
+        destination.appendChild(newClone1);
+        destination.appendChild(newClone2);
       }
+      setShirtDesign({
+        ...shirtDesign,
+      });
     } else {
       if (destination.innerHTML === "") {
         // clone the target
@@ -111,7 +134,11 @@ const SideBarShirtDesign = ({image}) => {
         destination.innerHTML = "";
         // append the target
         const clone = target.cloneNode(true);
-        destination.appendChild(clone);
+        // destination.appendChild(clone);
+
+        let newClone = nonDisplayElems.appendChild(clone);
+
+        destination.appendChild(newClone);
       }
     }
 
@@ -177,7 +204,7 @@ const SideBarShirtDesign = ({image}) => {
                             className="cloneable-element cuffs-elems"
                             onClick={(e) => hnd(e, "cuffs")}
                           >
-                            <Cuff image={image}/>
+                            <Cuff image={image} />
                           </div>
                         </Col>
                       );
@@ -217,6 +244,7 @@ const SideBarShirtDesign = ({image}) => {
           </Accordion.Collapse>
         </Card>
       </Accordion>
+      <div id="nonDisplayElems"></div>
     </div>
   );
 };
