@@ -154,92 +154,77 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
     <div className="shirtDesignerSideBar">
       <Accordion defaultActiveKey="0">
         <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              Collars
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body>
-              <Row>
-                {
-                  // dynamicly render the collars
-                  [Cl1, Cl2, Cl3, Cl4, Cl5, Cl6, Cl7, Cl8].map(
-                    (Collar, index) => {
-                      return (
-                        <Col lg={6} key={index}>
-                          <div
-                            className="cloneable-element"
-                            onClick={(e) => hnd(e, "collars")}
-                          >
-                            <Collar image={image} />
-                          </div>
-                        </Col>
-                      );
-                    }
-                  )
-                }
-              </Row>
-            </Card.Body>
-          </Accordion.Collapse>
+          <Card.Header>Collars</Card.Header>
+          <Card.Body>
+            <Row>
+              {
+                // dynamicly render the collars
+                [Cl1, Cl2, Cl3, Cl4, Cl5, Cl6, Cl7, Cl8].map(
+                  (Collar, index) => {
+                    return (
+                      <Col lg={6} key={index}>
+                        <div
+                          className="cloneable-element"
+                          onClick={(e) => hnd(e, "collars")}
+                        >
+                          <Collar image={image} />
+                        </div>
+                      </Col>
+                    );
+                  }
+                )
+              }
+            </Row>
+          </Card.Body>
         </Card>
         <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Cuffs
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="1">
-            <Card.Body>
-              <Row>
-                {
-                  // dynamicly render the cuffs
-                  [Cuff1, Cuff2, Cuff3, Cuff4, Cuff5, Cuff6, Cuff7, Cuff8].map(
-                    (Cuff, index) => {
-                      return (
-                        <Col lg={6} key={index}>
-                          <div
-                            className="cloneable-element cuffs-elems"
-                            onClick={(e) => hnd(e, "cuffs")}
-                          >
-                            <Cuff image={image} />
-                          </div>
-                        </Col>
-                      );
-                    }
-                  )
-                }
-              </Row>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-        <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="2">
-              Buttons
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="2">
-            <Card.Body>
-              <Row>
-                {colors.map((color, index) => {
-                  return (
-                    <Col lg={3} key={index}>
-                      <div
-                        style={{ backgroundColor: color }}
-                        className="clr"
-                        onClick={() => handleColorChange(color)}
-                      ></div>
-                    </Col>
-                  );
-                })}
-              </Row>
+          <Card.Header>Cuffs</Card.Header>
 
-              <div onClick={handleBtnClone} className="cloneable-element">
+          <Card.Body>
+            <Row>
+              {
+                // dynamicly render the cuffs
+                [Cuff1, Cuff2, Cuff3, Cuff4, Cuff5, Cuff6, Cuff7, Cuff8].map(
+                  (Cuff, index) => {
+                    return (
+                      <Col lg={6} key={index}>
+                        <div
+                          className="cloneable-element cuffs-elems"
+                          onClick={(e) => hnd(e, "cuffs")}
+                        >
+                          <Cuff image={image} />
+                        </div>
+                      </Col>
+                    );
+                  }
+                )
+              }
+            </Row>
+          </Card.Body>
+        </Card>
+        <Card>
+          <Card.Header>Buttons</Card.Header>
+          <Card.Body>
+            <Row>
+              {colors.map((color, index) => {
+                return (
+                  <Col lg={3} key={index}>
+                    <div
+                      style={{ backgroundColor: color }}
+                      className="clr"
+                      onClick={() => handleColorChange(color)}
+                    ></div>
+                  </Col>
+                );
+              })}
+            </Row>
+
+            <div onClick={handleBtnClone} className="cloneable-element">
+              <div className="svgButton">
                 <Btn bgColor={bgColor} />
               </div>
-            </Card.Body>
-          </Accordion.Collapse>
+            </div>
+          </Card.Body>
         </Card>
       </Accordion>
     </div>

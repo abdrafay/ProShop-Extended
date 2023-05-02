@@ -13,7 +13,7 @@ const orderSchema = mongoose.Schema(
           required: true,
         },
         shirtDesign: {
-          type: String
+          type: Object,
         },
         qty: {
           type: Number,

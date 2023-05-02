@@ -19,6 +19,7 @@ const HomeScreen = ({ match }) => {
   // Getting Products From Backend
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
+    console.log(productList, "productLis");
   }, [dispatch, pageNumber, keyword]);
 
   // useEffect(() => {
@@ -60,11 +61,12 @@ const HomeScreen = ({ match }) => {
           ) : (
             <>
               <Row>
-                {products.map((product) => (
-                  <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                    <Product product={product} />
-                  </Col>
-                ))}
+                {products.length > 0 &&
+                  products.map((product) => (
+                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                      <Product product={product} />
+                    </Col>
+                  ))}
               </Row>
               <Paginate
                 pages={pages}

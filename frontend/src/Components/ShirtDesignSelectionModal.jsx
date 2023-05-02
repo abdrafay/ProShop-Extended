@@ -3,7 +3,15 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 const ShirtDesignSelectionModal = ({ setShirtDesign, shirtDesign }) => {
   const [show, setShow] = useState(true);
-  const handle = () => setShow(!show);
+  const handle = () => {
+    console.log(shirtDesign.style, "style");
+    if (shirtDesign.style === "" || shirtDesign.style === undefined) {
+      alert("Please select a shirt style");
+      return;
+    }
+    localStorage.setItem("shirtDesign", JSON.stringify(shirtDesign));
+    setShow(!show);
+  };
   const handleRadioChange = (e) => {
     const { name, value } = e.target;
     setShirtDesign({ ...shirtDesign, style: value });

@@ -21,6 +21,13 @@ const DesignShirtScreen = ({ match, history, location }) => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
 
+  useEffect(() => {
+    let shirtStyle = localStorage.getItem("shirtDesign")
+      ? JSON.parse(localStorage.getItem("shirtDesign"))
+      : {};
+    setShirtDesign(shirtStyle);
+  }, []);
+
   const shirtDesignHandler = () => {
     localStorage.setItem("shirt-design-info", JSON.stringify(shirtDesign));
     history.push(`/cart/${match.params.id}?qty=${qty}`);
