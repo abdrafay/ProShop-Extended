@@ -6,6 +6,8 @@ import Message from "../Components/Message";
 import CheckoutSteps from "../Components/CheckoutSteps";
 import { createOrder } from "../actions/orderActions";
 import Layout from "../Components/Layout";
+import { USER_DETAILS_RESET } from "../constants/userConstants";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -32,6 +34,8 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
   }, [history, success]);

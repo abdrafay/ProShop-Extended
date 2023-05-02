@@ -19,8 +19,10 @@ const HomeScreen = ({ match }) => {
   // Getting Products From Backend
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
-    console.log(productList, "productLis");
   }, [dispatch, pageNumber, keyword]);
+  useEffect(() => {
+    console.log(productList, "productLis");
+  }, [products]);
 
   // useEffect(() => {
   //   let nav = document.querySelector("nav");

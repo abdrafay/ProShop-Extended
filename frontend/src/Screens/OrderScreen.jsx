@@ -4,38 +4,60 @@ import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../Components/Message";
 import Loader from "../Components/Loader";
-import { getOrderDetails } from "../actions/orderActions";
+import { deliverOrder, getOrderDetails } from "../actions/orderActions";
 import Layout from "../Components/Layout";
+import {
+  ORDER_DELIVER_RESET,
+  ORDER_PAY_RESET,
+} from "../constants/orderConstants";
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
+  const orderId = match.params.id;
+  const dispatch = useDispatch();
 
-    const orderId = match.params.id;
-    const dispatch = useDispatch();
+  const orderDetails = useSelector((state) => state.orderDetails);
+  const { order, loading, error } = orderDetails;
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
-    
-
-    const orderDetails = useSelector((state) => state.orderDetails );
-    const { order, loading, error } = orderDetails;
-    
-    if(!loading) {
-        // Calculate Prices
-        const addDecimal = (num) => {
-            return (Math.round(num * 100) / 100).toFixed(2);
-        };
-        order.itemsPrice = addDecimal(
-            order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-        );
-    }    
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  if (!loading) {
+    // Calculate Prices
+    const addDecimal = (num) => {
+      return (Math.round(num * 100) / 100).toFixed(2);
+    };
+    order.itemsPrice = addDecimal(
+      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    );
+  }
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-    
-  }, []);
+    if (!userInfo) {
+      history.push("/login");
+    }
 
-  
-  return loading ? <Loader /> : error ? <Message variant="danger">{error}</Message> : (
+    if (!order || successPay || successDeliver || order._id !== orderId) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch(getOrderDetails(orderId));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, orderId, successPay, successDeliver, order]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
+  };
+
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant="danger">{error}</Message>
+  ) : (
     <Layout>
-        <h1>Order {order._id}</h1>
+      <h1>Order {order._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
@@ -47,7 +69,13 @@ const OrderScreen = ({ match }) => {
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
-              {order.isDelivered ? <Message variant="success">Paid on {order.deliveredAt}</Message> : <Message variant="danger">Not Paid</Message>}
+              {order.isDelivered ? (
+                <Message variant="success">
+                  Delivered on {order.deliveredAt}
+                </Message>
+              ) : (
+                <Message variant="danger">Not Delivered</Message>
+              )}
             </ListGroup.Item>
             <ListGroup.Item>
               <h2>Payment Method</h2>
@@ -55,8 +83,11 @@ const OrderScreen = ({ match }) => {
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
-              {order.isPaid ? <Message variant="success">Paid on {order.paidAt}</Message> : <Message variant="danger">Not Paid</Message>}
-
+              {order.isPaid ? (
+                <Message variant="success">Paid on {order.PaidAt}</Message>
+              ) : (
+                <Message variant="danger">Not Paid</Message>
+              )}
             </ListGroup.Item>
             <ListGroup.Item>
               <h2>Order Items</h2>
@@ -121,13 +152,27 @@ const OrderScreen = ({ match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {loadingDeliver && loadingPay && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                !order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered & Paid
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
       </Row>
-      
     </Layout>
-    )
+  );
 };
 
 export default OrderScreen;

@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Order = require("../models/orderModel.js");
+const Product = require("../models/productModel.js");
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -30,9 +31,18 @@ const addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
+    // filter out products and update stock
+    const products = orderItems.map((item) => item.product);
+    const productsToUpdate = await Product.find({ _id: { $in: products } });
+    productsToUpdate.forEach(async (product) => {
+      const item = orderItems.find(
+        (item) => item.product === product._id.toString()
+      );
+      product.countInStock = product.countInStock - item.qty;
+      await product.save();
+    });
 
     const createdOrder = await order.save();
-
     res.status(201).json(createdOrder);
   }
 });
@@ -63,13 +73,6 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   if (order) {
     order.isPaid = true;
     order.paidAt = Date.now();
-    order.paymentResult = {
-      id: req.body.id,
-      status: req.body.status,
-      update_time: req.body.update_time,
-      email_address: req.body.payer.email_address,
-    };
-
     const updatedOrder = await order.save();
 
     res.json(updatedOrder);
@@ -88,6 +91,8 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
   if (order) {
     order.isDelivered = true;
     order.deliveredAt = Date.now();
+    order.isPaid = true;
+    order.PaidAt = Date.now();
 
     const updatedOrder = await order.save();
 
