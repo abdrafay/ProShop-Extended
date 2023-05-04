@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,11 +10,13 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
+import ShirtInfoModal from "../Components/ShirtInfoModal";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
   const dispatch = useDispatch();
-
+  const [showMD, setShowMD] = useState(false);
+  const [shirtDetails, setShirtDetails] = useState({}); // Shirt Design State
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   const orderPay = useSelector((state) => state.orderPay);
@@ -47,6 +49,11 @@ const OrderScreen = ({ match, history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, orderId, successPay, successDeliver, order]);
 
+  const handleModal = (styles) => {
+    setShirtDetails(styles);
+    setShowMD(true);
+  };
+
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
   };
@@ -57,6 +64,11 @@ const OrderScreen = ({ match, history }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <Layout>
+      <ShirtInfoModal
+        shirtDetails={shirtDetails}
+        showMD={showMD}
+        setShowMD={setShowMD}
+      />
       <h1>Order {order._id}</h1>
       <Row>
         <Col md={8}>
@@ -97,7 +109,7 @@ const OrderScreen = ({ match, history }) => {
                 <ListGroup variant="flush">
                   {order.orderItems.map((item, ind) => (
                     <ListGroup.Item key={ind}>
-                      <Row>
+                      <Row className="align-items-center">
                         <Col md={1}>
                           <Image
                             src={item.image}
@@ -111,8 +123,18 @@ const OrderScreen = ({ match, history }) => {
                             {item.name}
                           </Link>
                         </Col>
-                        <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.price * item.qty}
+                        <Col>
+                          <div>
+                            {item.qty} x ${item.price} = $
+                            {item.price * item.qty}
+                          </div>
+                        </Col>
+                        <Col md={2}>
+                          <Button
+                            onClick={() => handleModal(order.shirtDesign)}
+                          >
+                            Details
+                          </Button>
                         </Col>
                       </Row>
                     </ListGroup.Item>
