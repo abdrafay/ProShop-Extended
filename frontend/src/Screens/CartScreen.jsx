@@ -16,7 +16,12 @@ import Layout from "../Components/Layout";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+  const qty = location.search
+    ? Number(location.search.split("&")[1].split("=")[1])
+    : 1;
+  const size = location.search
+    ? location.search.split("?")[1].split("&")[0].split("=")[1]
+    : "M";
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -25,9 +30,9 @@ const CartScreen = ({ match, location, history }) => {
 
     if (productId) {
       if (shirtDesign) {
-        dispatch(addToCart(productId, qty, shirtDesign));
+        dispatch(addToCart(productId, qty, shirtDesign, size));
       } else {
-        dispatch(addToCart(productId, qty));
+        dispatch(addToCart(productId, qty, size));
       }
     }
   }, [dispatch, productId, qty]);
@@ -56,7 +61,9 @@ const CartScreen = ({ match, location, history }) => {
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
+                      <Link to={`/product/${item.product}`}>
+                        {item.name} - {item.size}
+                      </Link>
                     </Col>
                     <Col md={2}>${item.price}</Col>
                     <Col md={2}>

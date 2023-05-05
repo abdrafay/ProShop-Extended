@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 
 const ShirtInfoModal = ({ shirtDetails, showMD, setShowMD }) => {
   const handle = () => setShowMD(!showMD);
+
+  useEffect(() => {
+    console.log("ShirtInfoModal.jsx: ", shirtDetails);
+  }, [shirtDetails]);
 
   return (
     <Modal
@@ -13,14 +17,24 @@ const ShirtInfoModal = ({ shirtDetails, showMD, setShowMD }) => {
       keyboard={false}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
+        <Modal.Title>Shirt Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h5>Shirt Details</h5>
-        <p>Shirt Style: {shirtDetails.shirtStyle}</p>
-        {/* <p>Shirt Color: {shirtDetails.shirtColor}</p> */}
-        {/* <p>Shirt Size: {shirtDetails.shirtSize}</p> */}
-        {/* <p>Shirt Design: {shirtDetails.shirtDesign}</p> */}
+        <p>
+          <span style={{ fontWeight: 700 }}>Shirt Style:</span>{" "}
+          {shirtDetails.style}
+        </p>
+        <p>
+          <span style={{ fontWeight: 700 }}>Collar:</span> {shirtDetails.collar}
+        </p>
+        <p>
+          <span style={{ fontWeight: 700 }}>Cuffs:</span>
+          {shirtDetails.cuffs}
+        </p>
+        <p>
+          <span style={{ fontWeight: 700 }}>Buttons:</span>{" "}
+          {shirtDetails.buttonColor}
+        </p>
         {/* <p>Shirt Design Color: {shirtDetails.shirtDesignColor}</p> */}
         {/* <p>Shirt Design Size: {shirtDetails.shirtDesignSize}</p> */}
       </Modal.Body>

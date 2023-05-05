@@ -10,6 +10,7 @@ import {
   Card,
   Button,
   Form,
+  Table,
 } from "react-bootstrap";
 import {
   listProductDetails,
@@ -22,6 +23,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
+  const [size, setSize] = useState("Small");
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
@@ -52,11 +54,11 @@ const ProductScreen = ({ match, history }) => {
   }, [dispatch, match, successProductReview]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(`/cart/${match.params.id}?size=${size}&qty=${qty}`);
   };
 
   const designPage = () => {
-    history.push(`/design/${match.params.id}?qty=${qty}`);
+    history.push(`/design/${match.params.id}?size=${size}&qty=${qty}`);
   };
 
   const submitHandler = (e) => {
@@ -121,6 +123,19 @@ const ProductScreen = ({ match, history }) => {
                   </option>
                 ))}
               </Form.Control>
+              <h4>Size:</h4>
+              <Form.Control
+                as="select"
+                value={size}
+                style={{ marginBottom: 10 }}
+                onChange={(e) => setSize(e.target.value)}
+              >
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>X-Large</option>
+                <option>XX-Large</option>
+              </Form.Control>
 
               <h4>Description</h4>
               <p>${product.description}</p>
@@ -143,6 +158,75 @@ const ProductScreen = ({ match, history }) => {
                   Add To Cart
                 </Button>
               )}
+            </Col>
+          </Row>
+          <Row className="mt-4">
+            <Col>
+              <h2>The Normal Brand Size Chart</h2>
+              <Table className="sizeChart table" width="100%">
+                <thead>
+                  <tr>
+                    <td>Mens</td>
+                    <td>Small</td>
+                    <td>Medium</td>
+                    <td>Large</td>
+                    <td>X-Large</td>
+                    <td>XX-Large</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Neck</td>
+                    <td>14-14.5</td>
+                    <td>15-15.5</td>
+                    <td>16-16.5</td>
+                    <td>17-17.5</td>
+                    <td>18-18.5</td>
+                  </tr>
+                  <tr>
+                    <td>Chest</td>
+                    <td>35-37</td>
+                    <td>38-40</td>
+                    <td>41-43</td>
+                    <td>44-46</td>
+                    <td>47-49</td>
+                  </tr>
+                  <tr>
+                    <td>Sleeve</td>
+                    <td>32-33</td>
+                    <td>33-34</td>
+                    <td>34-35</td>
+                    <td>35-36</td>
+                    <td>36-36.5</td>
+                  </tr>
+                  <tr>
+                    <td>Waist</td>
+                    <td>29-31</td>
+                    <td>32-34</td>
+                    <td>35-37</td>
+                    <td>38-40</td>
+                    <td>41-43</td>
+                  </tr>
+                </tbody>
+              </Table>
+              {/* <p>
+                <strong>Neck:</strong> Measure around the middle of your neck
+                (at the Adam’s apple), keeping the tape a bit loose.
+              </p>
+              <p>
+                <strong>Chest:</strong> Measure under your arms around the
+                fullest part of your chest.
+              </p>
+              <p>
+                <strong>Arm length:</strong> Bend your elbow 90 degrees and
+                place your hand on your hip. Hold the tape at the center of the
+                back of your neck. Measure across your shoulder to your elbow
+                and down to your wrist. The total length is your sleeve length.
+              </p>
+              <p>
+                <strong>Waist:</strong> Measure around your natural waistline,
+                keeping the tape a bit loose.
+              </p> */}
             </Col>
           </Row>
           <Row>

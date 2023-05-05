@@ -14,8 +14,12 @@ const DesignShirtScreen = ({ match, history, location }) => {
   // const productId = match.params.id;
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+  const qty = location.search
+    ? Number(location.search.split("&")[1].split("=")[1])
+    : 1;
+  const size = location.search
+    ? location.search.split("?")[1].split("&")[0].split("=")[1]
+    : "M";
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
@@ -30,7 +34,7 @@ const DesignShirtScreen = ({ match, history, location }) => {
 
   const shirtDesignHandler = () => {
     localStorage.setItem("shirt-design-info", JSON.stringify(shirtDesign));
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(`/cart/${match.params.id}?size=${size}&qty=${qty}`);
   };
 
   useEffect(() => {

@@ -51,6 +51,7 @@ const OrderScreen = ({ match, history }) => {
 
   const handleModal = (styles) => {
     setShirtDetails(styles);
+    console.log("OrderScreen.jsx: ", styles);
     setShowMD(true);
   };
 
@@ -129,13 +130,17 @@ const OrderScreen = ({ match, history }) => {
                             {item.price * item.qty}
                           </div>
                         </Col>
-                        <Col md={2}>
-                          <Button
-                            onClick={() => handleModal(order.shirtDesign)}
-                          >
-                            Details
-                          </Button>
-                        </Col>
+                        {item.category === "Fabric" ? (
+                          <Col md={2}>
+                            <Button
+                              onClick={() => handleModal(item.shirtDesign)}
+                            >
+                              Details
+                            </Button>
+                          </Col>
+                        ) : (
+                          ""
+                        )}
                       </Row>
                     </ListGroup.Item>
                   ))}

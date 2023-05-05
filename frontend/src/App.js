@@ -21,6 +21,7 @@ import UserEditScreen from "./Screens/UserEditScreen";
 
 import "./App.scss";
 import OrderScreen from "./Screens/OrderScreen";
+import ContactScreen from "./Screens/ContactScreen";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/payment" component={PaymentScreen} />
         <Route path="/placeorder" component={PlaceOrderScreen} />
         <Route path="/login" component={LoginScreen} />
+        <Route path="/contact" component={ContactScreen} />
         <Route path="/register" component={RegisterScreen} />
         <Route path="/profile" component={ProfileScreen} />
         <Route path="/product/:id" component={ProductScreen} />

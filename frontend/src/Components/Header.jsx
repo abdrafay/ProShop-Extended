@@ -18,18 +18,24 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar variant="light" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>ProShop</Navbar.Brand>
+            <Navbar.Brand>
+              <img src="/images/logo.png" className="logo" alt="" />
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i> Cart
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/contact">
+                <Nav.Link>
+                  <i className="fas fa-shopping-cart"></i> Contact
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
@@ -65,6 +71,15 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <Container>
+        <div className="d-flex justify-content-end mt-4">
+          <Route
+            render={({ history }) => (
+              <SearchBox className="ml-auto" history={history} />
+            )}
+          />
+        </div>
+      </Container>
     </header>
   );
 };

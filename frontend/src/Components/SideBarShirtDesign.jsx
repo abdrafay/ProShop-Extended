@@ -65,7 +65,7 @@ const SideBarShirtDesign = ({ image, shirtDesign, setShirtDesign }) => {
       }
       setShirtDesign({
         ...shirtDesign,
-        buttons: true,
+        buttons: bgColor,
       });
     }
   };
