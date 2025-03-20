@@ -1,6 +1,6 @@
 # ProShop Extended
 
-ProShop Extended is a full-stack e-commerce application built using the MERN (MongoDB, Express.js, React, Node.js) stack. It allows users to browse products, add them to the cart, and complete purchases. The application also includes authentication, payment integration, and an admin dashboard for managing products and orders.
+ProShop Extended is a full-stack e-commerce application built using the MERN (MongoDB, Express.js, React, Node.js) stack. It allows users to browse products, add them to the cart, and complete purchases. The application also includes authentication, and an admin dashboard for managing products and orders.
 
 ## Features
 - User authentication (JWT-based login/register)
@@ -54,5 +54,4 @@ This will start both the backend and frontend servers concurrently.
 <li><b>Backend:</b> Node.js, Express.js</li> 
 <li><b>Database:</b> MongoDB</li>
 <li><b>Authentication:</b> JSON Web Token (JWT)</li>
-<li><b>Payment Gateway:</b> PayPal (or Stripe, if applicable)</li>
 </ul>
